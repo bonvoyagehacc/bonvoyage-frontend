@@ -4,28 +4,33 @@
         <span>UPLOAD PHOTOS</span>
     </div>
     <div class="body">
-        <div class="drag-and-drop-box" v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
-            Drag and Drop images
-        </div>
+        <!--List of images added-->
         <table class="uploaded-photo-table">
-            <thead>
-                <th class="table-header">Preview</th>
-                <th class="table-header">Number</th>
-                <th class="table-header">Remove</th>
+            <thead class="table-header">
+                <th>File Name</th>
+                <th></th>
             </thead>
             <tbody>
                 <!--Show a filler box if there are no photos uploaded-->
-                <tr v-if="uploadedPhotos.length == 0">
-                    <td>Upload a photo!</td>
+                <tr v-if="uploadedPhotos.length == 0" class="photo-entry">
+                    <td>No photos added...</td>
                     <td></td>
                 </tr>
-                <tr v-for="photo in uploadedPhotos" :key="photo" v-cloak>
-                <td><img class="image-preview" :src="photo.data"/></td>
-                <td>{{photo.name}}</td>
-                <td><button v-on:click="removePhotoFromList(photo)">X</button></td>
+                <tr v-for="photo in uploadedPhotos" :key="photo" v-cloak class="photo-entry">
+                <td class="photo-name" v-on:click="togglePreview(photo)">{{photo.name}}</td>
+                <td><button class="photo-remove" v-on:click="removePhotoFromList(photo)">X</button></td>
                 </tr>
             </tbody>
         </table>
+        <!--Preview Section-->
+        <button class="preview-image-box" disabled v-cloak>
+            Preview Image
+            <img v-if="previewingImage" :src="imageBeingPreviewed.data"/>
+        </button>
+        <!--Drag and Drop section-->
+        <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
+            Drag and Drop images
+        </button>
         <button class="submit-button" v-on:click="submitPhotos"> click me</button>
     </div>
     
@@ -39,13 +44,17 @@ export default {
         },
         removePhotoFromList: function(photo) {
             // removes photo from uploaded photos
-            this.uploadedPhotos.splice(this.uploadedPhotos.indexOf(photo), 1)
+            let removedPhoto = this.uploadedPhotos.splice(this.uploadedPhotos.indexOf(photo), 1)
+
+            if (removedPhoto[0].data == this.imageBeingPreviewed.data) {
+                this.imageBeingPreviewed = null;
+                this.previewingImage = false;
+            }
         },
         addPhotoToList: async function(event) {
             let photos = [...event.dataTransfer.files];
             // only images allowed
             photos = photos.filter(photo => photo.type.indexOf('image/') >= 0)
-            console.log("photos", photos)
 
             let promises = [];
 
@@ -55,23 +64,26 @@ export default {
             
             let sources = await Promise.all(promises)
             this.uploadedPhotos = this.uploadedPhotos.concat(sources)
-            console.log("uploaded photos", this.uploadedPhotos)
         },
         getBase64(file) { // courtesy of https://github.com/fabiofranchino/vue-drop-image-and-preview/blob/master/src/components/DropImages.vue
             const reader = new FileReader()
             return new Promise(resolve => {
                 reader.onload = ev => {
-                    console.log("ev,", ev)
                     resolve({"data": ev.target.result, "name": file.name})
                 }
-                console.log("file,", file)
                 reader.readAsDataURL(file)
             })
+        },
+        togglePreview: function(photo) {
+            this.previewingImage = true;
+            this.imageBeingPreviewed = photo;
         }
     },
     data() {
         return {
-            uploadedPhotos: []
+            uploadedPhotos: [],
+            previewingImage: false,
+            imageBeingPreviewed: null,
         }
     }
 }
@@ -80,12 +92,14 @@ export default {
 <style>
 .drag-and-drop-box{
     position: relative;
-    display: inline-block;
     background-color: #c9c9c9;
     text-align: center;
-    height: 50vh;
+    height: 45vh;
     width: 49%;
-    border: 1px solid black;
+    margin: 0.5%;
+    border: 0px;
+    outline: 1px solid black;
+    float: right;
 }
 
 .header {
@@ -93,6 +107,35 @@ export default {
     height: 50px;
     padding: 1rem;
     font-size: 2rem;
+}
+
+.photo-entry {
+    border-bottom: 1px solid black;
+}
+
+.photo-name:hover {
+    background-color: #c9c9c9;
+    cursor: pointer;
+}
+
+.photo-remove {
+    float: right;
+}
+
+.preview-image-box {
+    position: relative;
+    background-color: #c9c9c9;
+    text-align: center;
+    height: 45vh;
+    width: 49%;
+    margin: 0.5%;
+    border: 0px;
+    float: right;
+    outline: 1px solid black;
+}
+
+.table-header {
+    background-color: #c9c9c9;
 }
 
 .image-preview {
@@ -105,14 +148,42 @@ export default {
 }
 
 .submit-button {
-    border: 1px solid black;
+    padding: 5rem;
+    border: 0px;
     border-radius: 0px;
+    outline: 1px solid black;
+}
+
+.submit-button:hover {
+    background-color: lightblue;
+    cursor: pointer;
 }
 
 .uploaded-photo-table {
     position: relative;
-    border: 1px solid black;
+    float: left;
+    border: 0px;
+    outline: 1px solid black;
     max-width: 50%;
-    width: 50%;
+    height: 90vh;
+    width: 49%;
+    margin: 0.5%;
+    overflow-y: scroll;
 }
+
+tbody {
+    display: block;
+    overflow: auto;
+    height: 90vh;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
+}
+thead {
+    width: calc( 100% - 1em )/* scrollbar is average 1em/16px width, remove it from thead width */
+}
+
 </style>
