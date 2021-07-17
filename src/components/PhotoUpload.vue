@@ -203,21 +203,15 @@ export default {
 }
 
 .uploaded-photo-table {
-    position: relative;
-    float: left;
-    border: 0px;
     outline: 1px solid black;
-    max-width: 50%;
-    height: 90vh;
-    width: 49%;
-    margin: 0.5%;
+    height: 100%;
+    width: 50%;
     overflow-y: scroll;
 }
 
 tbody {
     display: block;
     overflow: auto;
-    height: 90vh;
 }
 
 thead, tbody tr {
