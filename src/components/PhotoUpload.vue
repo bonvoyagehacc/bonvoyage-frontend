@@ -1,7 +1,6 @@
 <template>
     <div class="header">
         <img class="logo" src="../assets/logo.png" />
-        <span>UPLOAD PHOTOS</span>
     </div>
     <div class="body">
         <!--List of images added-->
@@ -22,16 +21,18 @@
                 </tr>
             </tbody>
         </table>
-        <!--Preview Section-->
-        <button class="preview-image-box" disabled v-cloak>
-            Preview Image
-            <img v-if="previewingImage" :src="imageBeingPreviewed.data"/>
-        </button>
-        <!--Drag and Drop section-->
-        <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
-            Drag and Drop images
-        </button>
-        <button class="submit-button" v-on:click="submitPhotos"> click me</button>
+        <div class="boxes-and-buttons">
+            <!--Preview Section-->
+            <button class="preview-image-box" disabled v-cloak>
+                Preview Image
+                <img v-if="previewingImage" :src="imageBeingPreviewed.data"/>
+            </button>
+            <!--Drag and Drop section-->
+            <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
+                Drag and Drop images
+            </button>
+            <button class="submit-button" v-on:click="submitPhotos">Upload and Analyze</button>
+        </div>
     </div>
     
 </template>
@@ -113,12 +114,17 @@ export default {
 </script>
 
 <style>
+.body{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 65px);
+}
+
 .drag-and-drop-box{
     position: relative;
     background-color: #c9c9c9;
     text-align: center;
-    height: 45vh;
-    width: 49%;
+    height: calc(50% - 40px);
     margin: 0.5%;
     border: 0px;
     outline: 1px solid black;
@@ -128,7 +134,6 @@ export default {
 .header {
     background-color: coral;
     height: 50px;
-    padding: 1rem;
     font-size: 2rem;
 }
 
@@ -149,8 +154,7 @@ export default {
     position: relative;
     background-color: #c9c9c9;
     text-align: center;
-    height: 45vh;
-    width: 49%;
+    height: 50%;
     margin: 0.5%;
     border: 0px;
     float: right;
@@ -159,6 +163,13 @@ export default {
 
 .table-header {
     background-color: #c9c9c9;
+}
+
+.boxes-and-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: coral;
 }
 
 .image-preview {
@@ -171,10 +182,9 @@ export default {
 }
 
 .submit-button {
-    padding: 5rem;
-    border: 0px;
-    border-radius: 0px;
-    outline: 1px solid black;
+    border: 5px;
+    width: 100%;
+    height: 40px;
 }
 
 .submit-button:hover {
