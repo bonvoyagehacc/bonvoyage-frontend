@@ -12,7 +12,7 @@
                 <input type="submit" v-on:click="submitLogin(username, password)">
             </div>
             <div class="input-text" v-on:click="toggleMethod('register')">
-                No Account? Sign up! {{store}}
+                No Account? Sign up!
             </div>
         </div>
 

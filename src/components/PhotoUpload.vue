@@ -58,9 +58,11 @@ export default {
                 let image_name = image_dict.name;
                 zip.file(image_name, image_data, { base64: true})
             }
+
+            var user_token = this.$store.state.auth.accessToken
             
-            zip.generateAsync({type:"blob"}).then(function(content) {
-                let user_token = this.$store.auth.accessToken
+            zip.generateAsync({type:"arraybuffer"}).then(function(content) {
+                
                 console.log("content:", content)
                 sendZippedImages(content, user_token).then(resp =>{
                     console.log("Success!" + resp)
