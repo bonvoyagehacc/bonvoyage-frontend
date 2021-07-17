@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '/src/components/Home.vue'
+import ViewSorted from '/src/components/ViewSorted.vue'
 import PhotoUpload from '/src/components/PhotoUpload.vue'
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
+        path: '/viewsorted',
+        name: 'View Sorted',
+        component: ViewSorted,
     },
     {
         path: '/photoupload',
