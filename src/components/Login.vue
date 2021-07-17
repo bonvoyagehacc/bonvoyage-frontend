@@ -1,4 +1,7 @@
 <template>
+<div class="input-text" v-on:click="test()">
+                Test shit
+ </div>
     <div class="container">
         <div v-if="method=='login'" class="info-box">
             <div class="input-text">
