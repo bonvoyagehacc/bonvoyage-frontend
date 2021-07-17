@@ -17,7 +17,6 @@ export const auth = {
             state.accessToken = payload.accessToken;
             state.loggedIn = true;
             //console.log(`loginSuccess: recieved token ${payload.accessToken}`);
-
         },
         loginFailed(state) {
             state.accessToken = null;

@@ -55,6 +55,7 @@ export default {
                     this.$router.push('/');
                 },
                 err => {
+                    alert("invalid inputs!")
                     this.formStatus = `failure: ${err}`;
                 }
             );
