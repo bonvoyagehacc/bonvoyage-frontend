@@ -6,12 +6,15 @@
             <th class="table-header">Remove</th>
         </thead>
         <tbody>
-            <tr v-for="photo in uploadedPhotos" :key="photo">
-            <td>{{photo}}</td>
-            <td><button v-on:click="removePhotoFromList(photo)">Remove</button></td>
+            <tr v-for="photo in uploadedPhotos" :key="photo" v-cloak>
+            <td>{{photo[0].name}}</td>
+            <td><button v-on:click="removePhotoFromList(photo)">X</button></td>
             </tr>
         </tbody>
     </table>
+    <div class="drag-and-drop-box" v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
+        Drag and Drop images
+    </div>
     <button v-on:click="submitPhotos"> click me</button>
 </template>
 
@@ -22,24 +25,32 @@ export default {
             console.log("submitted photos")
         },
         removePhotoFromList: function(photo) {
-            this.uploadedPhotos.splice(photo, 1)
+            // removes photo from uploaded photos
+            this.uploadedPhotos.splice(this.uploadedPhotos.indexOf(photo), 1)
         },
-        addPhotoToList: function(photo) {
+        addPhotoToList: function(event) {
             var insertion_index = this.uploadedPhotos.length;
+            let photo = event.dataTransfer.files;
+            photo = [...photo]
             this.uploadedPhotos.push(photo)
         }
     },
     data() {
         return {
             name: "Martin",
-            uploadedPhotos: [0,1,2,3,4,5,6]
+            uploadedPhotos: []
         }
     }
 }
 </script>
 
 <style>
-.table-header{
-    background-color: red;
+.drag-and-drop-box{
+    position: relative;
+    background-color: #c9c9c9;
+    text-align: center;
+    height: 50vh;
+    width: 50vw;
+    border: 1px solid black;
 }
 </style>
