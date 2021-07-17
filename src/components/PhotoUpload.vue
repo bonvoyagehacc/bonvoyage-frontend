@@ -37,10 +37,32 @@
 </template>
 
 <script>
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
+import { sendZippedImages } from '/src/services/photoUpload.service'
 export default {
     methods: {
         submitPhotos: function() {
-            console.log("submitted photos")
+            var zip = new JSZip();
+            // create a jszip instance
+            // compress all photos to a zip folder before sending
+            for (let i = 0; i < this.uploadedPhotos.length; i++) {
+                let image_dict = this.uploadedPhotos[i]
+                let image_type = image_dict.data.split(",")[0];
+                let image_data = image_dict.data.split(",")[1];
+                let image_name = image_dict.name;
+                zip.file(image_name, image_data, { base64: true})
+            }
+            
+            zip.generateAsync({type:"blob"}).then(function(content) {
+                let user_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6Im5pdGhpbiIsImV4cCI6MTYyNjU0MzQ1NX0.thHBx6SR_WZWwg_YsO2i8d7RfPEC0qOSQb4RKaWsOxM"
+                console.log("content:", content)
+                sendZippedImages(content, user_token).then(resp =>{
+                    console.log("Success!" + resp)
+                }, err => {
+                    console.log("Something failed," + err)
+                })
+            });
         },
         removePhotoFromList: function(photo) {
             // removes photo from uploaded photos
@@ -84,6 +106,7 @@ export default {
             uploadedPhotos: [],
             previewingImage: false,
             imageBeingPreviewed: null,
+            zippedPhotos: []
         }
     }
 }
