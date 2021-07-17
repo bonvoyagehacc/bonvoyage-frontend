@@ -9,7 +9,7 @@ const routes = [
         component: ViewSorted,
     },
     {
-        path: '/photoupload',
+        path: '/',
         name: 'Photo Upload',
         component: PhotoUpload,
     }
