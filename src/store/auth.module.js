@@ -10,9 +10,7 @@ export const auth = {
 
     namespaced: true,
 
-    state: () => ({
-        name: "Tester"
-    }),
+    state: initialState,
 
     mutations: {
         loginSuccess(state, payload) {
@@ -69,4 +67,9 @@ export const auth = {
             })
         }
     },
+    computed: {
+        getState() {
+            return this.$store.state.loggedIn
+        }
+    }
 }

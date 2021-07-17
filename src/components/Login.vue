@@ -30,19 +30,21 @@
         </div>
 
         <div class="input-text" v-on:click="test()">
-                Test shit
+                test
             </div>
     </div>
 </template>
 
 <script>
 import AuthService from '/src/services/auth.service';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 
 export default {
     methods: {
         test: function() {
             console.log("token", localStorage.getItem('localData'))
-            console.log("store", this.$store)
+            console.log("store", this.$store.state.auth.loggedIn)
         },
         submitLogin: function(name, pass) {
             let data = {username: name, password: pass}
@@ -81,9 +83,14 @@ export default {
             password: "",
             registerusername: "",
             registerpassword: "",
-            formStatus: "unsubmitted"
+            formStatus: "unsubmitted",
+            store: useStore(),
+            isLoggedIn: computed(() => {
+                return this.store.state.loggedIn
+            })
         }
-    }
+    },
+    
 
 }
 </script>

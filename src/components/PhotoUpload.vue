@@ -42,6 +42,11 @@ import { saveAs } from 'file-saver';
 import { sendZippedImages } from '/src/services/photoUpload.service'
 export default {
     methods: {
+        preLoad: function() {
+            if (this.$store.state.auth.loggedIn == false) { // redirect to log in page
+                this.$router.push('/login');
+            }
+        },
         submitPhotos: function() {
             var zip = new JSZip();
             // create a jszip instance
@@ -55,7 +60,7 @@ export default {
             }
             
             zip.generateAsync({type:"blob"}).then(function(content) {
-                let user_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6Im5pdGhpbiIsImV4cCI6MTYyNjU0MzQ1NX0.thHBx6SR_WZWwg_YsO2i8d7RfPEC0qOSQb4RKaWsOxM"
+                let user_token = this.$store.auth.accessToken
                 console.log("content:", content)
                 sendZippedImages(content, user_token).then(resp =>{
                     console.log("Success!" + resp)
@@ -108,7 +113,10 @@ export default {
             imageBeingPreviewed: null,
             zippedPhotos: []
         }
-    }
+    },
+    beforeMount(){
+        this.preLoad()
+    },
 }
 </script>
 
