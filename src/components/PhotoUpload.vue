@@ -26,7 +26,7 @@
                 </tr>
             </tbody>
         </table>
-        <button v-on:click="submitPhotos"> click me</button>
+        <button class="submit-button" v-on:click="submitPhotos"> click me</button>
     </div>
     
 </template>
@@ -78,15 +78,13 @@ export default {
 </script>
 
 <style>
-.body {
-    display: inline-block;
-}
 .drag-and-drop-box{
     position: relative;
+    display: inline-block;
     background-color: #c9c9c9;
     text-align: center;
     height: 50vh;
-    width: 50vw;
+    width: 49%;
     border: 1px solid black;
 }
 
@@ -99,14 +97,20 @@ export default {
 
 .image-preview {
     max-width: 5rem;
-    max-height: 3rem;
+    max-height: 5rem;
 }
 
 .logo {
     height: 50px;
 }
 
+.submit-button {
+    border: 1px solid black;
+    border-radius: 0px;
+}
+
 .uploaded-photo-table {
+    position: relative;
     border: 1px solid black;
     max-width: 50%;
     width: 50%;
