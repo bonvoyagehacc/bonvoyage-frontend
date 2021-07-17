@@ -6,10 +6,10 @@
             </div>
             <div class="input-text">
                 <input type="password" v-model="password" placeholder="Password">
-                <input type="submit" v-on:click="submitLogin">
+                <input type="submit" v-on:click="submitLogin(username, password)">
             </div>
             <div class="input-text" v-on:click="toggleMethod('register')">
-                No Account? Sign up!
+                No Account? Sign up! {{store}}
             </div>
         </div>
 
@@ -25,28 +25,47 @@
                 Already Registered? Sign in!
             </div>
         </div>
+
+        <div class="input-text" v-on:click="test()">
+                Test shit
+            </div>
     </div>
 </template>
 
 <script>
-import { userRegister } from '/src/services/auth.service';
+import AuthService from '/src/services/auth.service';
+
 export default {
     methods: {
-        submitLogin: function() {
-            console.log("name and pass", this.username, this.password)
+        test: function() {
+            console.log("token", localStorage.getItem('localData'))
+            console.log("store", this.$store)
+        },
+        submitLogin: function(name, pass) {
+            let data = {username: name, password: pass}
+            this.$store.dispatch('auth/login', data)
+            .then(
+                data => {
+                    this.formStatus = `success: ${data}`;
+                    this.$router.push('/');
+                },
+                err => {
+                    this.formStatus = `failure: ${err}`;
+                }
+            );
         },
         submitRegister: function(name, pass) {
-            userRegister(name, pass)
-            .then(resp=> {
-                let token = resp.accessToken;
-                if (token != undefined) {
-                    //set local storage
-                    
+            let data = {username: name, password: pass}
+            this.$store.dispatch('auth/register', data)
+            .then(
+                data => {
+                    this.formStatus = `success: ${data}`;
+                    this.$router.push('/');
+                },
+                err => {
+                    this.formStatus = `failure: ${err}`;
                 }
-                console.log("response", resp)
-            }, err => {
-                console.log(err)
-            })
+            );
         },
         toggleMethod: function(method) {
             this.method = method;
@@ -59,6 +78,7 @@ export default {
             password: "",
             registerusername: "",
             registerpassword: "",
+            formStatus: "unsubmitted"
         }
     }
 

@@ -10,7 +10,9 @@ export const auth = {
 
     namespaced: true,
 
-    state: initialState,
+    state: () => ({
+        name: "Tester"
+    }),
 
     mutations: {
         loginSuccess(state, payload) {
@@ -28,12 +30,20 @@ export const auth = {
             state.accessToken = null;
             state.loggedIn = false;
             //console.log(`Logged Out`);
+        },
+        registerSuccess(state, payload) {
+            state.accessToken = payload.accessToken;
+            state.loggedIn = true;
+        },
+        registerFailed(state) {
+            state.accessToken = null;
+            state.loggedIn = false;
         }
     },
 
     actions: {
-        login({ commit }, passcode) {
-            return AuthService.login(passcode)
+        login({ commit }, data) {
+            return AuthService.login(data.username, data.password)
             .then(
                 data => {
                     commit('loginSuccess', data);
@@ -48,6 +58,15 @@ export const auth = {
         logout({ commit }) {
             AuthService.logout();
             commit('logout');
+        },
+        register({ commit }, data) {
+            return AuthService.userRegister(data.username, data.password).then(resp => {
+                commit('loginSuccess', data);
+                return Promise.resolve(data);
+            }, err=> {
+                commit('loginFailed');
+                return Promise.reject(err)
+            })
         }
     },
 }
