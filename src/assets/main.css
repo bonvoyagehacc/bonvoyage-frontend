@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "D-DIN";
+    font-weight: 400;
+    font-style: normal;
+    font-display: auto;
+    unicode-range: U+000-5FF;
+    src: local("D-DIN"), url("public/fonts/D-DIN/D-DIN.woff2") format("woff2"), url("public/fonts/D-DIN/D-DIN.woff") format("woff");
+  }
