@@ -29,7 +29,10 @@
             </button>
             <!--Drag and Drop section-->
             <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="dragAndDroppedPhotos" @dragover.prevent>
-                <input type="file" accept="image/*" @change="fileExplorerPhotos" multiple/>
+                <input class="input-images" id="selectedFile" style="display: none;" 
+                type="file" accept="image/*" @change="fileExplorerPhotos" multiple/>
+                <input class="input-images" type="button" value="Drag and Drop or Upload Images" 
+                onclick="document.getElementById('selectedFile').click();" />
             </button>
             <button class="submit-button" v-on:click="submitPhotos">Upload and Analyze</button>
         </div>
@@ -146,12 +149,24 @@ export default {
     border: 0px;
     outline: 1px solid black;
     float: right;
+    padding: 0rem;
 }
 
 .header {
     background-color: coral;
     height: 50px;
     font-size: 2rem;
+}
+
+.input-images {
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 0rem;
+}
+
+.input-images:hover {
+    cursor: pointer;
 }
 
 .photo-entry {
@@ -199,9 +214,11 @@ export default {
 }
 
 .submit-button {
-    border: 5px;
+    outline: 1px black;
     width: 100%;
     height: 40px;
+    border-radius: 0px;
+    border: 0px;
 }
 
 .submit-button:hover {

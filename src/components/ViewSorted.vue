@@ -14,11 +14,21 @@
 <script>
 // MUST ADD LOGIN CHECK
 export default {
+  methods: {
+    preLoad: function() {
+      if (this.$store.state.auth.loggedIn == false) { // redirect to log in page
+        this.$router.push('/login');
+      }
+    },
+  },
   data() {
     return {
       displaycontent: ["src/assets/temp1.png", "src/assets/temp2.png", "src/assets/temp3.png"]
     }
-  }
+  },
+  beforeMount(){
+    this.preLoad()
+  },
 }
 </script>
 
