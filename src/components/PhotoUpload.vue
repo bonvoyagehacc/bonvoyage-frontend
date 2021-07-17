@@ -4,7 +4,7 @@
     </div>
     <div class="body">
         <!--List of images added-->
-        <table class="uploaded-photo-table">
+        <table class="uploaded-photo-table" v-cloak @drop.prevent="dragAndDroppedPhotos" @dragover.prevent>
             <thead class="table-header">
                 <th>File Name</th>
                 <th></th>
@@ -24,12 +24,12 @@
         <div class="boxes-and-buttons">
             <!--Preview Section-->
             <button class="preview-image-box" disabled v-cloak>
-                Preview Image
-                <img v-if="previewingImage" :src="imageBeingPreviewed.data"/>
+                <span v-if="!previewingImage">Preview Image</span>
+                <img class="preview-image" v-if="previewingImage" :src="imageBeingPreviewed.data"/>
             </button>
             <!--Drag and Drop section-->
-            <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="addPhotoToList" @dragover.prevent>
-                Drag and Drop images
+            <button class="drag-and-drop-box" disabled v-cloak @drop.prevent="dragAndDroppedPhotos" @dragover.prevent>
+                <input type="file" accept="image/*" @change="fileExplorerPhotos" multiple/>
             </button>
             <button class="submit-button" v-on:click="submitPhotos">Upload and Analyze</button>
         </div>
@@ -81,11 +81,18 @@ export default {
                 this.previewingImage = false;
             }
         },
-        addPhotoToList: async function(event) {
+        dragAndDroppedPhotos: function(event) { // for photos inputted via drag and drop
             let photos = [...event.dataTransfer.files];
             // only images allowed
             photos = photos.filter(photo => photo.type.indexOf('image/') >= 0)
-
+            this.processPhotos(photos)
+        },
+        fileExplorerPhotos: function(event) { // for photos inputted via file explorer
+            let photos = [...event.target.files]
+            photos = photos.filter(photo => photo.type.indexOf('image/') >= 0)
+            this.processPhotos(photos)
+        },
+        processPhotos: async function(photos) {
             let promises = [];
 
             photos.forEach(photo => {
@@ -160,6 +167,11 @@ export default {
     float: right;
 }
 
+.preview-image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .preview-image-box {
     position: relative;
     background-color: #c9c9c9;
@@ -180,11 +192,6 @@ export default {
     flex-direction: column;
     width: 50%;
     background-color: coral;
-}
-
-.image-preview {
-    max-width: 5rem;
-    max-height: 5rem;
 }
 
 .logo {

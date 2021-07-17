@@ -12,6 +12,7 @@
 </template>
 
 <script>
+// MUST ADD LOGIN CHECK
 export default {
   data() {
     return {
