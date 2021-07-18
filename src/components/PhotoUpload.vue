@@ -26,7 +26,7 @@
         <div class="boxes-and-buttons">
             <!--Preview Section-->
             <button class="preview-image-box" disabled v-cloak>
-                <span v-if="!previewingImage">Preview Image</span>
+                <span v-if="!previewingImage">Image Preview</span>
                 <img class="preview-image" v-if="previewingImage" :src="imageBeingPreviewed.data"/>
             </button>
             <!--Drag and Drop section-->
@@ -174,6 +174,7 @@ export default {
 .header {
     height: 3rem;
     font-size: 2rem;
+    padding-bottom: 0.5rem;
 }
 
 .input-images {
