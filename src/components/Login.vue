@@ -10,7 +10,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="password" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitLogin(username, password)">
+                <input class="info-submit-button" type="submit" value="Log In" v-on:click="submitLogin(username, password)">
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('register')">
                 No Account? Sign up!
@@ -27,7 +27,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="registerpassword" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitRegister(registerusername, registerpassword)">
+                <input class="info-submit-button" type="submit" value="Sign Up" v-on:click="submitRegister(registerusername, registerpassword)">
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('login')">
                 Already Registered? Sign in!
@@ -108,31 +108,38 @@ export default {
 }
 
 .info-submit-button {
-    border: 0px !important;
     width: 25%;
+    height: 21pt;
+    margin-left: 2%;
+    border-radius: 0.25rem;
 }
 
 .info-submit-button:hover {
     cursor: pointer;
+    background-color: teal;
+    color: snow;
+    border: 0px;
 }
 
 .input-text {
     width: 100%;
+    height: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
 }
 
 .input-text > input {
     position: relative;
     vertical-align: middle;
-    border-radius: 0px;
-    border: 0px;
-    outline: 1px solid black;
+    border-radius: 0.25rem;
     margin-top: 0.5%;
-    padding: 0px;
+    border: 1px solid gainsboro;
 }
 
 .input-text > input:focus {
-    outline: 1px solid black;
-    border-radius: 0px;
+    border: 1px solid darkslategray;
+    border-radius: 0.25rem;
 }
 
 .input-text:hover {
@@ -141,10 +148,21 @@ export default {
 
 .password-input-box {
     width: 75%;
+    font-size: 14pt;
+    color: darkslategray;
 }
 
 .username-input-box {
     width: 100%;
+    font-size: 14pt;
+    color: darkslategray;
+}
+
+.toggle-options {
+    text-align: center;
+    font-family: sans-serif;
+    margin-top: 1rem;
+    color: darkslategray;
 }
 
 .toggle-options:hover {
