@@ -152,9 +152,13 @@ export default {
     padding: 0rem;
 }
 
+.logo {
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+}
+
 .header {
-    background-color: coral;
-    height: 50px;
+    height: 3rem;
     font-size: 2rem;
 }
 
