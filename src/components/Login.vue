@@ -1,37 +1,38 @@
 <template>
-<div class="input-text" v-on:click="test()">
-                Test shit
- </div>
     <div class="container">
+        <!--Login User-->
         <div v-if="method=='login'" class="info-box">
+            <!--Logo-->
+            <img class="web-logo" src="src/assets/logo.png" />
+            <!--Input Fields-->
             <div class="input-text">
-                <input type="text" v-model="username" placeholder="Username">
+                <input class="username-input-box" type="text" v-model="username" placeholder="Username">
             </div>
             <div class="input-text">
-                <input type="password" v-model="password" placeholder="Password">
-                <input type="submit" v-on:click="submitLogin(username, password)">
+                <input class="password-input-box" type="password" v-model="password" placeholder="Password">
+                <input class="info-submit-button" type="submit" value=">" v-on:click="submitLogin(username, password)">
             </div>
-            <div class="input-text" v-on:click="toggleMethod('register')">
+            <div class="toggle-options" v-on:click="toggleMethod('register')">
                 No Account? Sign up!
             </div>
         </div>
 
+        <!--Register User-->
         <div v-if="method=='register'" class="info-box">
+            <!--Logo-->
+            <img class="web-logo" src="src/assets/logo.png" />
+            <!--Input Fields-->
             <div class="input-text">
-                <input type="text" v-model="registerusername" placeholder="Username">
+                <input class="username-input-box" type="text" v-model="registerusername" placeholder="Username">
             </div>
             <div class="input-text">
-                <input type="password" v-model="registerpassword" placeholder="Password">
-                <input type="submit" v-on:click="submitRegister(registerusername, registerpassword)">
+                <input class="password-input-box" type="password" v-model="registerpassword" placeholder="Password">
+                <input class="info-submit-button" type="submit" value=">" v-on:click="submitRegister(registerusername, registerpassword)">
             </div>
-            <div class="input-text" v-on:click="toggleMethod('login')">
+            <div class="toggle-options" v-on:click="toggleMethod('login')">
                 Already Registered? Sign in!
             </div>
         </div>
-
-        <div class="input-text" v-on:click="test()">
-                test
-            </div>
     </div>
 </template>
 
@@ -97,21 +98,61 @@ export default {
 </script>
 
 <style>
-.container {
-    width: 100vw;
-    height: 100vh;
-}
-
 .info-box {
     width: 25%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.info-submit-button {
+    border: 0px !important;
+    width: 25%;
+}
+
+.info-submit-button:hover {
+    cursor: pointer;
+}
+
+.input-text {
+    width: 100%;
 }
 
 .input-text > input {
     position: relative;
     vertical-align: middle;
     border-radius: 0px;
-    border: 1px solid black;
+    border: 0px;
+    outline: 1px solid black;
     margin-top: 0.5%;
+    padding: 0px;
+}
+
+.input-text > input:focus {
+    outline: 1px solid black;
+    border-radius: 0px;
+}
+
+.input-text:hover {
+    cursor: pointer;
+}
+
+.password-input-box {
+    width: 75%;
+}
+
+.username-input-box {
+    width: 100%;
+}
+
+.toggle-options:hover {
+    cursor: pointer;
+}
+
+.web-logo{
+    width: 100%
 }
 
 </style>
