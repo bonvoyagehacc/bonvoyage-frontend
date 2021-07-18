@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <img class="logo" src="public/assets/logo.png" />
+        <img class="logo" src="https://pixolo.us/assets/logo.png" />
         <button class="navigation-button" v-on:click="navigateToSorted">View Your Photos</button>
         <button class="navigation-button" v-on:click="logOutUser">Log Out</button>
     </div>

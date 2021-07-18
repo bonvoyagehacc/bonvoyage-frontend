@@ -3,7 +3,7 @@
         <!--Login User-->
         <div v-if="method=='login'" class="info-box">
             <!--Logo-->
-            <img class="web-logo" src="public/assets/logo.png" />
+            <img class="web-logo" src="https://pixolo.us/logo.png" />
             <!--Input Fields-->
             <div class="input-text">
                 <input class="username-input-box" type="text" v-model="username" placeholder="Username">

@@ -1,35 +1,26 @@
 {
-  "version": "0.0.0",
+  "name": "pixolousfrontend",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vue-cli-service serve --port 3000",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "core-js": "^3.6.5",
     "file-saver": "^2.0.5",
     "jszip": "^3.6.0",
-    "vue": "^3.1.5",
+    "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
-    "vue-router": "^4.0.10",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.5",
-    "@vue/compiler-sfc": "^3.0.5",
-    "vite": "^2.4.2"
-  },
-  "name": "bonvoyage-frontend",
-  "main": "vite.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bonvoyagehacc/bonvoyage-frontend.git"
-  },
-  "author": "martin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bonvoyagehacc/bonvoyage-frontend/issues"
-  },
-  "homepage": "https://github.com/bonvoyagehacc/bonvoyage-frontend#readme",
-  "description": ""
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0"
+  }
 }
