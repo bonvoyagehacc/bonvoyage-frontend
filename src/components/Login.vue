@@ -10,7 +10,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="password" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitLogin(username, password)">
+                <input class="info-submit-button" type="submit" value=">" v-on:click="submitLogin">
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('register')">
                 No Account? Sign up!
@@ -27,7 +27,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="registerpassword" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitRegister(registerusername, registerpassword)">
+                <input class="info-submit-button" type="submit" value=">" v-on:click="submitRegister">
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('login')">
                 Already Registered? Sign in!
@@ -47,8 +47,9 @@ export default {
             console.log("token", localStorage.getItem('localData'))
             console.log("store", this.$store.state.auth.loggedIn)
         },
-        submitLogin: function(name, pass) {
-            let data = {username: name, password: pass}
+        submitLogin: function(e) {
+            e.preventDefault()
+            let data = {username: this.username, password: this.password}
             this.$store.dispatch('auth/login', data)
             .then(
                 data => {
@@ -61,8 +62,9 @@ export default {
                 }
             );
         },
-        submitRegister: function(name, pass) {
-            let data = {username: name, password: pass}
+        submitRegister: function(e) {
+            e.preventDefault()
+            let data = {username: this.registerusername, password: this.registerpassword}
             this.$store.dispatch('auth/register', data)
             .then(
                 data => {

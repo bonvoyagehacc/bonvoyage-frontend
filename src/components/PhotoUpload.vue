@@ -169,6 +169,7 @@ export default {
 .logo {
   margin-left: 1rem;
   margin-top: 0.25rem;
+  height: 100%;
 }
 
 .header {
