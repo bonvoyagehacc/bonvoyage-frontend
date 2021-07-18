@@ -2,6 +2,7 @@
   <div class="header">
     <img class="logo" src="src/assets/logo.png" />
     <button class="navigation-button" v-on:click="navigateToUpload">Upload Photos</button>
+    <button class="navigation-button" v-on:click="downloadAll">Download</button>
   </div>
   <div class="grid">
     <div v-for="item in displaycontent" :key="item" class="displayitem">
@@ -12,7 +13,9 @@
 </template>
 
 <script>
-// MUST ADD LOGIN CHECK
+import { fetchImages } from '/src/services/viewSorted.service'
+import { saveAs } from 'file-saver';
+import JSZip from 'jszip'
 export default {
   methods: {
     preLoad: function() {
@@ -22,15 +25,52 @@ export default {
     },
     navigateToUpload: function() {
       this.$router.push('/');
+    },
+    fetchSortedImages: function() {
+      var user_token = this.$store.state.auth.accessToken
+
+      fetchImages(user_token).then(resp => {
+        this.displaycontent = resp.image
+        console.log("displaying", resp)
+      }, err=> {
+        console.log("error fetching images:", err)
+      })
+    },
+    downloadAll: async function() {
+      var zip = new JSZip();
+      for (let i = 0; i < this.displaycontent.length; i++) {
+        let img_url = this.displaycontent[i]
+        let image_data = await this.getBase64FromUrl(img_url)
+        image_data = image_data.split(",")[1]
+        let image_name = img_url.split("/")[4]
+        zip.file(image_name, image_data, { base64: true})
+      }
+      zip.generateAsync({type: "blob"}).then(function (content) {
+        saveAs(content, `images.zip`);
+      });
+    },
+    getBase64FromUrl: async function(url) {
+      const data = await fetch(url);
+      const blob = await data.blob();
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        reader.onloadend = () => {
+      const base64data = reader.result;   
+      resolve(base64data);
     }
+  });
+}
   },
   data() {
     return {
-      displaycontent: ["src/assets/temp1.png", "src/assets/temp2.png", "src/assets/temp3.png", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg", "src/assets/temp4.jpg"]
+      displaycontent: []
     }
   },
   beforeMount(){
     this.preLoad()
+    // fetch our data
+    this.fetchSortedImages()
   },
 }
 </script>

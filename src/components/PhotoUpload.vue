@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <img class="logo" src="../assets/logo.png" />
-        <button class="navigation-button" v-on:click="navigateToSorted">Upload Photos</button>
+        <button class="navigation-button" v-on:click="navigateToSorted">View Sorted Photos</button>
     </div>
     <div class="body">
         <!--List of images added-->
@@ -43,7 +43,6 @@
 
 <script>
 import JSZip from 'jszip'
-import { saveAs } from 'file-saver';
 import { sendZippedImages } from '/src/services/photoUpload.service'
 export default {
     methods: {
