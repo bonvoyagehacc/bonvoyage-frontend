@@ -10,10 +10,10 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="password" placeholder="Password">
-                <button class="info-submit-button" v-on:click="submitLogin">></button>
+                <button class="info-submit-button" v-on:click="submitLogin">Sign In</button>
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('register')">
-                No Account? Sign up!
+                No Account? Sign Up!
             </div>
         </div>
 
@@ -27,10 +27,10 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="registerpassword" placeholder="Password">
-                <button class="info-submit-button" v-on:click="submitRegister">></button>
+                <button class="info-submit-button" v-on:click="submitRegister">Register</button>
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('login')">
-                Already Registered? Sign in!
+                Already Registered? Sign In!
             </div>
         </div>
     </div>
@@ -112,8 +112,10 @@ export default {
 .info-submit-button {
     width: 25%;
     height: 21pt;
+    margin-top: 0.12rem;
     margin-left: 2%;
     border-radius: 0.25rem;
+    border: 1px solid gainsboro;
 }
 
 .info-submit-button:hover {
@@ -168,7 +170,6 @@ export default {
 }
 
 .toggle-options {
-    text-decoration: underline;
 }
 
 .toggle-options:hover {
