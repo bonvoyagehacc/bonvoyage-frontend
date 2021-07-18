@@ -10,7 +10,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="password" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitLogin">
+                <button class="info-submit-button" v-on:click="submitLogin">></button>
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('register')">
                 No Account? Sign up!
@@ -27,7 +27,7 @@
             </div>
             <div class="input-text">
                 <input class="password-input-box" type="password" v-model="registerpassword" placeholder="Password">
-                <input class="info-submit-button" type="submit" value=">" v-on:click="submitRegister">
+                <button class="info-submit-button" v-on:click="submitRegister">></button>
             </div>
             <div class="toggle-options" v-on:click="toggleMethod('login')">
                 Already Registered? Sign in!
