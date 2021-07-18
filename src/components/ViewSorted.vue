@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <img class="logo" src="src/assets/logo.png" />
-    <button class="navphotos">Upload Photos</button>
+    <button class="navigation-button" v-on:click="navigateToUpload">Upload Photos</button>
   </div>
   <div class="grid">
     <div v-for="item in displaycontent" :key="item" class="displayitem">
@@ -20,6 +20,9 @@ export default {
         this.$router.push('/login');
       }
     },
+    navigateToUpload: function() {
+      this.$router.push('/');
+    }
   },
   data() {
     return {
@@ -59,5 +62,8 @@ export default {
   width: 12rem;
   height: 12rem;
   margin: auto;
+}
+.navigation-button {
+  float: right;
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <img class="logo" src="../assets/logo.png" />
+        <button class="navigation-button" v-on:click="navigateToSorted">Upload Photos</button>
     </div>
     <div class="body">
         <!--List of images added-->
@@ -117,6 +118,9 @@ export default {
         togglePreview: function(photo) {
             this.previewingImage = true;
             this.imageBeingPreviewed = photo;
+        },
+        navigateToSorted: function() {
+            this.$router.push('/viewsorted')
         }
     },
     data() {
@@ -171,6 +175,10 @@ export default {
 
 .input-images:hover {
     cursor: pointer;
+}
+
+.navigation-button {
+    float: right;
 }
 
 .photo-entry {
