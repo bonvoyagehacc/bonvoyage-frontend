@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <img class="logo" src="https://pixolo.us/logo.png" />
-    <button class="navigation-button" v-on:click="navigateToUpload">Upload More Photos</button>
-    <button class="navigation-button" v-on:click="downloadAll">Download All Images</button>
+    <button class="navigation-button" v-on:click="navigateToUpload">Upload More</button>
+    <button class="navigation-button" v-on:click="downloadAll">Download All Photos</button>
   </div>
   <div class="grid" v-cloak>
     <div v-for="item in displaycontent" :key="item" class="displayitem">
@@ -111,6 +111,8 @@ export default {
 .navigation-button {
     float: right;
     height: 50%;
+    margin: 0.25%;
+    margin-top: 0.75%;
     border-radius: 0.25rem;
     border: 1px solid darkslategray;
     background-color: whitesmoke;
@@ -120,7 +122,7 @@ export default {
 .navigation-button:hover {
     cursor: pointer;
     background-color: teal;
+    border: 1px solid teal;
     color: snow;
-    border: 0px;
 }
 </style>

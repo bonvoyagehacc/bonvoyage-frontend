@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <img class="logo" src="https://pixolo.us/logo.png" />
-        <button class="navigation-button" v-on:click="navigateToSorted">View Your Photos</button>
+        <button class="navigation-button" v-on:click="navigateToSorted">View Photos</button>
         <button class="navigation-button" v-on:click="logOutUser">Log Out</button>
     </div>
     <div class="body">
@@ -195,6 +195,8 @@ export default {
 .navigation-button {
     float: right;
     height: 50%;
+    margin: 0.25%;
+    margin-top: 0.75%;
     border-radius: 0.25rem;
     border: 1px solid darkslategray;
     background-color: whitesmoke;
@@ -204,8 +206,8 @@ export default {
 .navigation-button:hover {
     cursor: pointer;
     background-color: teal;
+    border: 1px solid teal;
     color: snow;
-    border: 0px;
 }
 
 .photo-entry {
