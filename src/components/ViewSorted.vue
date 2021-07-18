@@ -3,6 +3,7 @@
     <img class="logo" src="https://pixolo.us/logo.png" />
     <button class="navigation-button" v-on:click="navigateToUpload">Upload More</button>
     <button class="navigation-button" v-on:click="downloadAll">Download All Photos</button>
+    <button class="navigation-button" v-on:click="logOutUser">Log Out</button>
   </div>
   <div class="grid" v-cloak>
     <div v-for="item in displaycontent" :key="item" class="displayitem">
@@ -56,11 +57,20 @@ export default {
         const reader = new FileReader();
         reader.readAsDataURL(blob); 
         reader.onloadend = () => {
-      const base64data = reader.result;   
-      resolve(base64data);
+          const base64data = reader.result;   
+          resolve(base64data);
+        }
+      });
+    },
+    logOutUser: function() {
+      this.$store.dispatch('auth/logout').then(resp => {
+          console.log("logging out");
+          this.$router.push('/login')
+      }, err => {
+          alert("Log out failed")
+      }   
+      )
     }
-  });
-}
   },
   data() {
     return {
