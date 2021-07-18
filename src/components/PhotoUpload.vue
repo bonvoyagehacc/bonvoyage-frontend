@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <img class="logo" src="https://pixolo.us/assets/logo.png" />
+        <img class="logo" src="https://pixolo.us/logo.png" />
         <button class="navigation-button" v-on:click="navigateToSorted">View Your Photos</button>
         <button class="navigation-button" v-on:click="logOutUser">Log Out</button>
     </div>
@@ -14,7 +14,7 @@
             <tbody>
                 <!--Show a filler box if there are no photos uploaded-->
                 <tr v-if="uploadedPhotos.length == 0" class="photo-entry">
-                    <td>No photos added...</td>
+                    <td>No photos added ...</td>
                     <td></td>
                 </tr>
                 <tr v-for="photo in uploadedPhotos" :key="photo" v-cloak class="photo-entry">
@@ -156,14 +156,15 @@ export default {
 
 .drag-and-drop-box{
     position: relative;
-    background-color: #c9c9c9;
     text-align: center;
-    height: calc(50% - 40px);
+    height: 50%;
     margin: 0.5%;
-    border: 0px;
-    outline: 1px solid black;
+    margin-bottom: 0;
     float: right;
-    padding: 0rem;
+    border-radius: 1rem 1rem 0rem 0rem;
+    border: 1px solid gainsboro;
+    background-color: whitesmoke;
+    border-bottom: 0;
 }
 
 .logo {
@@ -182,7 +183,9 @@ export default {
     border: 0px;
     width: 100%;
     height: 100%;
-    padding: 0rem;
+    font-size: 14pt;
+    color: darkslategray;
+    background-color: whitesmoke;
 }
 
 .input-images:hover {
@@ -191,14 +194,18 @@ export default {
 
 .navigation-button {
     float: right;
-    border: 0px;
-    border-radius: 0px;
-    height: 100%;
+    height: 50%;
+    border-radius: 0.25rem;
+    border: 1px solid darkslategray;
+    background-color: whitesmoke;
+    color:darkslategray;
 }
 
 .navigation-button:hover {
-    background-color: lightblue;
     cursor: pointer;
+    background-color: teal;
+    color: snow;
+    border: 0px;
 }
 
 .photo-entry {
@@ -206,12 +213,23 @@ export default {
 }
 
 .photo-name:hover {
-    background-color: #c9c9c9;
+    background-color: whitesmoke;
     cursor: pointer;
 }
 
 .photo-remove {
+    outline: 0px;
+    border: 0px;
+    border-radius: 5px;
     float: right;
+    color: crimson;
+    background-color: snow;
+}
+
+.photo-remove:hover {
+    background-color: crimson;
+    color: snow;
+    outline: none;
 }
 
 .preview-image {
@@ -221,17 +239,19 @@ export default {
 
 .preview-image-box {
     position: relative;
-    background-color: #c9c9c9;
+    background-color: whitesmoke;
     text-align: center;
     height: 50%;
     margin: 0.5%;
-    border: 0px;
     float: right;
-    outline: 1px solid black;
+    font-size: 14pt;
+    border-radius: 1rem 1rem 1rem 1rem;
+    border: 1px solid gainsboro;
 }
 
 .table-header {
-    background-color: #c9c9c9;
+    font-family: sans-serif;
+    color: darkslategray;
 }
 
 .boxes-and-buttons {
@@ -245,26 +265,32 @@ export default {
 }
 
 .submit-button {
-    outline: 1px black;
     width: 99%;
-    height: 10%;
-    border-radius: 0px;
-    border: 0px;
+    height: 2rem;
     margin: 0.5%;
-    outline: 1px solid black;
+    margin-top: 0;
+    font-size: 12pt;
+    border-radius: 0rem 0rem 1rem 1rem;
+    border: 1px solid gainsboro;
+    color: darkslategray;
+    background-color: whitesmoke;
 }
 
 .submit-button:hover {
-    background-color: lightblue;
+    background-color: teal;
+    color: snow;
     cursor: pointer; 
 }
 
 .uploaded-photo-table {
-    outline: 1px solid black;
-    height: 100%;
+    height: calc(100% - 0.5rem);
     width: 50%;
     margin: 0.25%;
     overflow-y: scroll;
+    border-radius: 1rem 1rem 1rem 1rem;
+    border: 1px solid gainsboro;
+    font-family: sans-serif;
+    color: darkslategray;
 }
 
 tbody {

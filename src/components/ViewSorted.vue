@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img class="logo" src="https://pixolo.us/assets/logo.png" />
+    <img class="logo" src="https://pixolo.us/logo.png" />
     <button class="navigation-button" v-on:click="navigateToUpload">Upload More Photos</button>
     <button class="navigation-button" v-on:click="downloadAll">Download All Images</button>
   </div>
@@ -85,25 +85,42 @@ export default {
     height: 3rem;
     font-size: 2rem;
 }
+
 .grid {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .displayitem {
-  background-color: coral;
+  background-color: whitesmoke;
+  border: 1px solid gainsboro;
   height: 12rem;
   width: 12rem;
   margin: 1rem;
   display: flex;
 }
+
 .displayimage {
   object-fit: contain;
   width: 12rem;
   height: 12rem;
   margin: auto;
 }
+
 .navigation-button {
-  float: right;
+    float: right;
+    height: 50%;
+    border-radius: 0.25rem;
+    border: 1px solid darkslategray;
+    background-color: whitesmoke;
+    color:darkslategray;
+}
+
+.navigation-button:hover {
+    cursor: pointer;
+    background-color: teal;
+    color: snow;
+    border: 0px;
 }
 </style>

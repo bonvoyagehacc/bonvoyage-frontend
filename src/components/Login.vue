@@ -20,7 +20,7 @@
         <!--Register User-->
         <div v-if="method=='register'" class="info-box">
             <!--Logo-->
-            <img class="web-logo" src="src/assets/logo.png" />
+            <img class="web-logo" src="https://pixolo.us/logo.png" />
             <!--Input Fields-->
             <div class="input-text">
                 <input class="username-input-box" type="text" v-model="registerusername" placeholder="Username">
@@ -167,9 +167,6 @@ export default {
     font-family: sans-serif;
     margin-top: 1rem;
     color: darkslategray;
-}
-
-.toggle-options {
 }
 
 .toggle-options:hover {
