@@ -190,6 +190,14 @@ export default {
 
 .navigation-button {
     float: right;
+    border: 0px;
+    border-radius: 0px;
+    height: 100%;
+}
+
+.navigation-button:hover {
+    background-color: lightblue;
+    cursor: pointer;
 }
 
 .photo-entry {
@@ -229,7 +237,6 @@ export default {
     display: flex;
     flex-direction: column;
     width: 50%;
-    background-color: coral;
 }
 
 .logo {
@@ -238,21 +245,24 @@ export default {
 
 .submit-button {
     outline: 1px black;
-    width: 100%;
-    height: 40px;
+    width: 99%;
+    height: 10%;
     border-radius: 0px;
     border: 0px;
+    margin: 0.5%;
+    outline: 1px solid black;
 }
 
 .submit-button:hover {
     background-color: lightblue;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .uploaded-photo-table {
     outline: 1px solid black;
     height: 100%;
     width: 50%;
+    margin: 0.25%;
     overflow-y: scroll;
 }
 

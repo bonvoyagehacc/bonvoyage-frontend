@@ -2,7 +2,7 @@
   <div class="header">
     <img class="logo" src="src/assets/logo.png" />
     <button class="navigation-button" v-on:click="navigateToUpload">Upload More Photos</button>
-    <button class="navigation-button" v-on:click="downloadAll">Download</button>
+    <button class="navigation-button" v-on:click="downloadAll">Download All Images</button>
   </div>
   <div class="grid" v-cloak>
     <div v-for="item in displaycontent" :key="item" class="displayitem">

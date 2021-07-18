@@ -147,6 +147,10 @@ export default {
     width: 100%;
 }
 
+.toggle-options {
+    text-decoration: underline;
+}
+
 .toggle-options:hover {
     cursor: pointer;
 }
