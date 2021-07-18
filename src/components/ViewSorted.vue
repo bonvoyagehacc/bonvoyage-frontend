@@ -1,10 +1,10 @@
 <template>
   <div class="header">
     <img class="logo" src="src/assets/logo.png" />
-    <button class="navigation-button" v-on:click="navigateToUpload">Upload Photos</button>
+    <button class="navigation-button" v-on:click="navigateToUpload">Upload More Photos</button>
     <button class="navigation-button" v-on:click="downloadAll">Download</button>
   </div>
-  <div class="grid">
+  <div class="grid" v-cloak>
     <div v-for="item in displaycontent" :key="item" class="displayitem">
       <img :src="item" class="displayimage"/>
     </div>

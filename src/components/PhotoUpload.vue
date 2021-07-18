@@ -1,7 +1,8 @@
 <template>
     <div class="header">
         <img class="logo" src="../assets/logo.png" />
-        <button class="navigation-button" v-on:click="navigateToSorted">View Sorted Photos</button>
+        <button class="navigation-button" v-on:click="navigateToSorted">View Your Photos</button>
+        <button class="navigation-button" v-on:click="logOutUser">Log Out</button>
     </div>
     <div class="body">
         <!--List of images added-->
@@ -70,6 +71,7 @@ export default {
                 console.log("content:", content)
                 sendZippedImages(content, user_token).then(resp =>{
                     console.log("Success!" + resp)
+                    alert("Successfully analysed! You can now view your photos!")
                 }, err => {
                     console.log("Something failed," + err)
                 })
@@ -120,6 +122,15 @@ export default {
         },
         navigateToSorted: function() {
             this.$router.push('/viewsorted')
+        },
+        logOutUser: function() {
+            this.$store.dispatch('auth/logout').then(resp => {
+                console.log("logging out");
+                this.$router.push('/login')
+            }, err => {
+                alert("Log out failed")
+            }   
+            )
         }
     },
     data() {
